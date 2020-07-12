@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Implementation-Title: wync-api
+Implementation-Title: wynk-api
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: GOMEDII
-Implementation-Vendor-Id: io.wyncmusic
+Implementation-Vendor-Id: io.wynkmusic
 Build-Jdk: 1.8.0_191
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/wync-api
+ ot-starter-parent/wynk-api
 Created-By: Maven Integration for Eclipse
 
