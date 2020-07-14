@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.wynk.entities.Banner;
+import com.wynk.exceptions.WynkServiceException;
 import com.wynk.services.BannerSerivice;
+import com.wynk.views.BannerView.BannerBasicView;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,8 +40,7 @@ public class BannerController {
 	
 	@ApiOperation(value = "Add Music banner")
 	@PostMapping(value = "/banners")
-	@JsonView(Banner.class)
-	
+	@JsonView(BannerBasicView.class)
 	public Banner addBanner(@RequestBody Banner banner) {
 		return bannerService.addBanner(banner);
 	}
@@ -56,7 +57,7 @@ public class BannerController {
 	
 	@ApiOperation(value = "get all Music banner")
 	@GetMapping(value = "/banners")
-	@JsonView(Banner.class)
+	@JsonView(BannerBasicView.class)
 	
 	public Iterable<Banner> getBanner() {
 		return bannerService.getBanners();
@@ -74,9 +75,9 @@ public class BannerController {
 	
 	@ApiOperation(value = "get Music banner")
 	@GetMapping(value = "/banners/{bannerId}")
-	@JsonView(Banner.class)
+	@JsonView(BannerBasicView.class)
 	
-	public Banner getBanner(@PathVariable(value = "bannerId") Long id) {
+	public Banner getBanner(@PathVariable(value = "bannerId") Long id) throws WynkServiceException{
 		return bannerService.getBanner(id);
 	}
 	
@@ -92,9 +93,9 @@ public class BannerController {
 	
 	@ApiOperation(value = "Add Music banner")
 	@PutMapping(value = "/banners/{bannerId}")
-	@JsonView(Banner.class)
+	@JsonView(BannerBasicView.class)
 	
-	public Banner updateBanner(@PathVariable(value = "bannerId") Long id, @RequestBody Banner banner) {
+	public Banner updateBanner(@PathVariable(value = "bannerId") Long id, @RequestBody Banner banner) throws WynkServiceException{
 		return bannerService.updateBanner(id, banner);
 	}
 	
@@ -109,12 +110,27 @@ public class BannerController {
 		}
 	)
 	
-	@ApiOperation(value = "Add Music banner")
+	@ApiOperation(value = "Delete Music banner")
 	@DeleteMapping(value = "/banners/{bannerId}")
-	@JsonView(Banner.class)
-	
-	public Banner deleteBanner(@PathVariable(value = "bannerId") Long id, @RequestBody Banner banner) {
-		return bannerService.updateBanner(id, banner);
+	public void deleteBanner(@PathVariable(value = "bannerId") Long id) throws WynkServiceException{
+		bannerService.deleteBanner(id);
 	}
+	
+	
+//	@ApiResponses(value = {
+//	        @ApiResponse(code = 200, message = "Successfully get all required  Banner"),
+//	        @ApiResponse(code = 401, message = "You are not authorized to get all Agent details"),
+//	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+//	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+//	        @ApiResponse(code = 400, message = "Bad Request")
+//		}
+//	)
+//	
+//	@ApiOperation(value = "Get all Music banner for selected lang")
+//	@GetMapping(value = "/banners")
+//	
+//	public Iterable<Banner> getBannersForLang( @RequestBody Iterable<Long> langIds) throws WynkServiceException{
+//		return bannerService.getBannersForLang(langIds);
+//	}
 	
 }

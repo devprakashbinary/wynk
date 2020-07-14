@@ -33,7 +33,6 @@ public class Banner implements Serializable {
 	@JsonView(BannerBasicView.class)
 	private Long langId;
 	
-	@JsonView(BannerBasicView.class)
 	private Boolean isDeleted = Boolean.FALSE;
 	
 	public Banner() {
